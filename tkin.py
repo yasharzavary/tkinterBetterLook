@@ -19,7 +19,7 @@ class tkinWarning(Warning):
 
 class window():
     def __init__(self, title='window', w=500, h=500, x=0, y=0, iconAddress=None, bgColor = '#526D82'):
-        self.__root = None
+        self.__root = self.__windowMaker(title, w, h, x, y, iconAddress, bgColor)
         self.__bg = '#526D82'
         self.__butBg = '#9DB2BF'
         self.__butBgI = '#DDE6ED'
@@ -51,3 +51,27 @@ class window():
         if iconAddress: root.iconbitmap(iconAddress)
         root.config(bg=bg)
         return root
+
+    def show(self):
+        self.__root.mainloop()
+
+    @property
+    def bgColor(self):
+        return self.__bg
+
+    @property
+    def title(self):
+        return self.__title
+
+    @title.setter
+    def title(self, new):
+        self.__title = new
+        self.__root.title(new)
+
+    @property
+    def width(self):
+        return self.__width
+
+    @property
+    def height(self):
+        return self.__height
