@@ -130,3 +130,21 @@ class window():
         if where is None: but.pack()
         else: but.pack(side=where)
         return but
+    def addEntry(self, master=None, where=RIGHT):
+        ent = Entry(master=master if master != None else self.__root)
+        self.__whereChecker(where)
+        ent.pack(side=where)
+        return ent
+
+
+    def addText(self, text='', master=None, where=None, bg=None, fg='#000000'):
+        t = Label(master=master if master != None else self.__root, text=text, fg=fg, bg=self.__bg if bg ==None else bg)
+        self.__whereChecker(where)
+        if where is None: t.pack()
+        else: t.pack(side=where)
+
+    def __del__(self):
+        try:
+            self.__root.destroy()
+        except:
+            pass
