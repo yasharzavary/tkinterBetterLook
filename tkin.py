@@ -113,3 +113,20 @@ class window():
             for i in b:
                 if not re.search(r'[0-9A-F]', i) or len(i) != 7: raise tkinError('your color info isn\'t valid')
         elif not re.search(r'[0-9A-F]', b) or len(b) != 7: raise tkinError('your background color isn\'t valid')
+
+    def __buttonControl(self, action, doupleAction, bgIn, bg, fg, cursor):
+        if not callable(action): raise tkinError('you must give one function in action')
+        if doupleAction == None: tkinWarning('your double action not writed...it can make some false actions in your code')
+        elif not callable(doupleAction): raise tkinError('you must give one function in doubleAction')
+        self.__colorChecker([bgIn, bg, fg])
+
+    def  addButton(self, action, doubleAction=None, master=None, bgIn='#DDE6ED', bg='#9DB2BF', fg='#000000', text = 'click', cursor='fleur', where = None):
+        self.__buttonControl(action, doubleAction, bgIn, bg, fg, cursor)
+        but = Button(master=master if  master != None else self.__root, text=text, bg=bg, cursor=cursor, fg=fg)
+        but.bind('<Button>', action)
+        but.bind('<Enter>', lambda x: but.config(bg=bgIn))
+        but.bind('<Leave>', lambda x: but.config(bg=bg))
+        self.__whereChecker(where)
+        if where is None: but.pack()
+        else: but.pack(side=where)
+        return but
