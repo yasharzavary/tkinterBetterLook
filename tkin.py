@@ -1,6 +1,19 @@
 from tkinter import *
-import warnings
 import os
+import warnings
+import re
+from tkinter import messagebox
+
+class messBog():
+    def __init__(self, mes):
+        self.__mes = mes
+
+    def makeError(self):
+        messagebox.showerror('Error', self.__mes)
+
+    def showInfo(self):
+        messagebox.showinfo('Info', self.__mes)
+
 
 class tkinError(Exception):
     def __init__(self, message):
@@ -75,3 +88,28 @@ class window():
     @property
     def height(self):
         return self.__height
+
+
+    def __frameControl(self, b, w, h):
+        self.__colorChecker(b)
+        if (w != None and w <= 0) or (h != None and h <= 0): raise tkinError('your with and height isn\'t valid')
+
+    def __whereChecker(self, where):
+        if where not in [LEFT, RIGHT, BOTTOM, TOP, None]:
+            raise tkinError('not valid where input')
+
+    def addFrame(self, bg='#526D82', width=None, height=None, where=None, expand=False):
+        self.__frameControl(bg, width, height)
+        if width is None: width = self.__width // 4
+        if height is None: height = self.__height // 4
+        frame = Frame(master=self.__root, bg=bg, width=width, height=height)
+        frame.pack_propagate(False)
+        if where is None: frame.pack(expand=expand)
+        else: frame.pack(side=where, expand=expand)
+        return frame
+
+    def __colorChecker(self, b):
+        if isinstance(b, list):
+            for i in b:
+                if not re.search(r'[0-9A-F]', i) or len(i) != 7: raise tkinError('your color info isn\'t valid')
+        elif not re.search(r'[0-9A-F]', b) or len(b) != 7: raise tkinError('your background color isn\'t valid')
