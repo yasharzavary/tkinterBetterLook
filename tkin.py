@@ -15,3 +15,14 @@ class tkinWarning(Warning):
         super().__init__()
     def __str__(self):
         return f'warning {self.__warn}'
+
+
+class window():
+    def __init__(self, title='window', w=500, h=500, x=0, y=0, iconAddress=None, bgColor = '#526D82'):
+        self.__root = None
+        self.__bg = '#526D82'
+        self.__butBg = '#9DB2BF'
+        self.__butBgI = '#DDE6ED'
+        self.__width = w
+        self.__height = h
+        self.__title = title
