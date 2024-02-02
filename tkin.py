@@ -65,6 +65,10 @@ class window():
         root.config(bg=bg)
         return root
 
+    @property
+    def getWidgets(self):
+        return self.__root.winfo_children()
+
     def show(self):
         self.__root.mainloop()
 
