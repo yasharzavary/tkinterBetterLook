@@ -32,8 +32,8 @@ class tkinWarning(Warning):
 
 
 class window():
-    def __init__(self, title='window', w=500, h=500, x=0, y=0, iconAddress=None, bgColor = '#526D82'):
-        self.__root = self.__windowMaker(title, w, h, x, y, iconAddress, bgColor)
+    def __init__(self, title='window', w=500, h=500, x=0, y=0, iconAddress=None, bgColor = '#526D82', resizeW=True, resizeH=True):
+        self.__root = self.__windowMaker(title, w, h, x, y, iconAddress, bgColor, resizeW, resizeH)
         self.__bg = '#526D82'
         self.__butBg = '#9DB2BF'
         self.__butBgI = '#DDE6ED'
@@ -51,11 +51,12 @@ class window():
         if icon and not os.path.exists(icon): raise tkinError('this isn\'t valid icon address')
         if x < 0 or y < 0 or x > scrW or y > scrH: warnings.warn(tkinWarning('x and y place cordinate out of range...you window will go outside of the screen'))
 
-    def __windowMaker(self, title, w, h, x, y, iconAddress, bg):
+    def __windowMaker(self, title, w, h, x, y, iconAddress, bg, resizeW, resizeH):
         root = Tk()
         # screen info
         windowHeight = root.winfo_screenheight()
         windowWidth = root.winfo_screenwidth()
+        root.resizable(width=resizeW, height=resizeH)
         # info check
         self.__control(w, h, x, y, iconAddress, windowWidth, windowHeight)
         root.title(title)
