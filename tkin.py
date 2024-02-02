@@ -99,8 +99,11 @@ class window():
     def fileDIR(self):
         return self.__fileDirectory
 
-    def addFileDialog(self):
-        self.__fileDirectory = filedialog.askdirectory()
+    def addFileDialog(self, fileTypes=[('ALL files', '*.*')]):
+        self.__fileDirectory = filedialog.askopenfilename(
+            title='select a file',
+            filetypes=fileTypes
+        )
 
     def widgetEraser(self, start=None, finish=None):
         wids = self.getWidgets
@@ -172,6 +175,7 @@ class window():
         self.__whereChecker(where)
         if where is None: t.pack()
         else: t.pack(side=where)
+        return t
 
     def __del__(self):
         try:
