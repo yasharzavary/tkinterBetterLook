@@ -3,6 +3,7 @@ import os
 import warnings
 import re
 from tkinter import messagebox
+from tkinter import filedialog
 
 class messBog():
     def __init__(self, mes):
@@ -39,6 +40,7 @@ class window():
         self.__width = w
         self.__height = h
         self.__title = title
+        self.__fileDirectory = None
 
     def __control(self, w, h, x, y, icon, scrW, scrH):
         """
@@ -93,6 +95,30 @@ class window():
     def height(self):
         return self.__height
 
+    @property
+    def fileDIR(self):
+        return self.__fileDirectory
+
+    def addFileDialog(self):
+        self.__fileDirectory = filedialog.askdirectory()
+
+    def widgetEraser(self, start=None, finish=None):
+        wids = self.getWidgets
+        try:
+            if start is None and finish is None:
+                for wid in wids:
+                    wid.destroy()
+            elif start is None:
+                for i in range(0, finish):
+                    wids[i].destroy()
+            elif finish is None:
+                for i in range(start, len(wids)):
+                    wids[i].destroy()
+            else:
+                for i in range(start, finish):
+                    wids[i].destroy()
+        except IndexError as err:
+            messBog(err).makeError()
 
     def __frameControl(self, b, w, h):
         self.__colorChecker(b)
