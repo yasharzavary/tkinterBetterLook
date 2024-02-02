@@ -32,7 +32,7 @@ class tkinWarning(Warning):
 
 
 class window():
-    def __init__(self, title='window', w=500, h=500, x=0, y=0, iconAddress=None, bgColor = '#526D82', resizeW=True, resizeH=True):
+    def __init__(self, title='window', w=500, h=500, x=0, y=0, iconAddress=None, bgColor = '#526D82', resizeW=False, resizeH=False):
         self.__root = self.__windowMaker(title, w, h, x, y, iconAddress, bgColor, resizeW, resizeH)
         self.__bg = '#526D82'
         self.__butBg = '#9DB2BF'

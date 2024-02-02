@@ -18,3 +18,5 @@ this library have one main class and some helpers...
 * all functions have default value that can make you a good default GUI
 
 i wish that this project help you to develop faster and better in your projects.
+
+*note: after some updates it will change to the library and you can have it with PIP*
